@@ -7,4 +7,10 @@ If the project targets only ‘net5.0-windows’, and the project is opened clea
 If you repeat the test from #1 with one change - start with Visual Studio closed, delete the bin/obj folders, and change the TargetFramework in the project to ‘net48’. Follow the above steps, but note that when you try to reopen the designer after the build, it will successfully open. This behavior is in-line with Visual Studio 2017 v15.9.34, and is the behavior I’d expect.
 Unrelated to this issue, is that when targeting ‘net5.0-windows’, the View menu ‘Tab Order’ is greyed out. When targeting ‘net48’, this option becomes available. I am not sure if this is being tracked under ‘https://developercommunity.visualstudio.com/t/Tab-Order-not-working/1063906’ or if this is a different issue. Please advise if I should open a separate issue for this bug.
 
-Experienced and reproducible in the same way in VS 2019 16.9.2 and 16.10.0 Preview 1.0
+Experienced and reproducible in the same way in VS 2019 16.9.2/16.9.3 and 16.10.0 Preview 1.0
+
+Here is a visual of the reproduction for .NET 4.8. This works as expected, or at least it works the same way prior versions of Visual Studio handles it. The bin and obj folders have been deleted, the targetframework set to ‘net48’, visual studio started, then solution loaded. The project file and inheritedcontrol.cs opened. This is where the video starts. I build the project, close the failed inheritedcontrol.cs designer, and open it again. Notice how it loads successfully.
+![Screen Recording of NET48](Framework48.gif)
+
+Here is a visual of the reproduction for .NET 5. This is the buggy behavior. The bin and obj folders have been deleted, the targetframework set to ‘net5.0-windows’, visual studio started, then solution loaded. The project file and inheritedcontrol.cs opened. This is where the video starts. I build the project, close the failed inheritedcontrol.cs designer, and open it again. Notice how the designer still fails to load. If I were to restart visual studio and load the same solution, the designer loads successfully.
+![Screen Recording of NET50](netcore50.gif)
